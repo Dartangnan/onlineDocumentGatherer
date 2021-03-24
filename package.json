@@ -1,0 +1,19 @@
+{
+  "name": "certificatefetcher",
+  "version": "1.0.0",
+  "description": "Fetch pdf files online and makes it available to users",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dartangnan/onlineDocumentGatherer.git"
+  },
+  "author": "Dartangnan Moreira Theml",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dartangnan/onlineDocumentGatherer/issues"
+  },
+  "homepage": "https://github.com/Dartangnan/onlineDocumentGatherer#readme"
+}
