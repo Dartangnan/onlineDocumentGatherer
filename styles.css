@@ -187,7 +187,7 @@ section {
 .sub-text {
   font-family: Lato;
   width: 50%;
-  min-width: 400px;
+  min-width: 300px;
   text-align: justify;
   text-indent: 25px;
 }
@@ -322,7 +322,7 @@ section {
   font-family: Lato;
   color: white;
   width: 50%;
-  min-width: 400px;
+  min-width: 300px;
   text-align: justify;
   text-indent: 25px;
 }
@@ -331,6 +331,7 @@ section {
   font-family: Lato;
   color: rgba(255, 255, 255, 0.233);
   font-size: 1.7rem;
+  text-align: center;
 }
 
 .img-hidden {
@@ -338,7 +339,7 @@ section {
 }
 /* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
-/* -=-=-=-=-=-=-=-=-=-=-= Try It =-=-=-=-=-=-=-=-=-=-=- */
+/* -=-=-=-=-=-=-=-=-=-=-= Other Documents =-=-=-=-=-=-=-=-=-=-=- */
 #other-documents {
   display: grid;
   place-items: center;
@@ -350,6 +351,7 @@ section {
   font-size: 3rem;
   font-weight: 600;
   color: var(--dark-blue);
+  text-align: center;
 }
 
 .other-documents-shell {
@@ -392,7 +394,7 @@ section {
   justify-content: flex-start;
 }
 /* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
-/* -=-=-=-=-=-=-=-=-=-=-= Try It =-=-=-=-=-=-=-=-=-=-=- */
+/* -=-=-=-=-=-=-=-=-=-=-= Contact Us =-=-=-=-=-=-=-=-=-=-=- */
 #contact-us {
   display: grid;
   place-items: center;
@@ -415,7 +417,7 @@ section {
 #contact-us p {
   font-family: Lato;
   width: 50%;
-  min-width: 400px;
+  min-width: 300px;
   text-align: justify;
   text-indent: 25px;
 }
@@ -451,19 +453,11 @@ section {
   justify-content: space-between;
   align-items: flex-end;
 }
-.form-item {
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin: 5px 5px 20px;
-}
 
 .form-item-name input {
   width: 100%;
   color: rgb(63, 63, 63);
   border-bottom: 1px solid rgb(124, 124, 124);
-  border-right: 1px solid rgb(124, 124, 124);
   font-size: 1rem;
 }
 
@@ -484,7 +478,6 @@ section {
   width: 100%;
   color: rgb(63, 63, 63);
   border-bottom: 1px solid rgb(124, 124, 124);
-  border-right: 1px solid rgb(124, 124, 124);
   font-size: 1rem;
 }
 
@@ -505,7 +498,6 @@ section {
   width: 100%;
   color: rgb(63, 63, 63);
   border-bottom: 1px solid rgb(124, 124, 124);
-  border-right: 1px solid rgb(124, 124, 124);
   font-size: 1rem;
 }
 
@@ -526,11 +518,77 @@ section {
 }
 
 /* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
 /* -=-=-=-=-=-=-=-=-=-=-= Footer =-=-=-=-=-=-=-=-=-=-=- */
 footer {
   height: 150px;
   background-color: var(--dark-blue);
+  width: 100%;
   margin-top: 80px;
 }
 
 /* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= Media query =-=-=-=-=-=-=-=-=-=-=- */
+@media only screen and (max-width: 770px) {
+  /* -=-= Nav Bar =-=-*/
+  nav {
+    display: none;
+  }
+
+  /* -=-= Home =-=-*/
+
+  .home-shell {
+    font-size: 2rem;
+    size: 90%;
+  }
+
+  .now-title {
+    padding: 10px 25px 0px;
+  }
+
+  .home-shell h3 {
+    font-size: 1.2rem;
+  }
+
+  /* -=-= Try It =-=-*/
+  .cnpj-input {
+    font-size: 1.1rem;
+  }
+
+  .try-it-shell label {
+    font-size: 1.1rem;
+  }
+
+  .try-it-btn {
+    font-size: 1.1rem;
+  }
+
+  .loading-img {
+    margin: 25px 0;
+  }
+
+  /* -=-= Contact Us =-=-*/
+
+  .contact-us-form {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .contact-us-form {
+    width: 60%;
+    padding: 25px 15px;
+    margin-top: 15px;
+  }
+
+  .form-item-email {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+
+  .btn-contact-us {
+    grid-row: 4/5;
+    grid-column: 1/2;
+  }
+}
