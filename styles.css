@@ -54,6 +54,10 @@ section {
   transition: transform 0.2s ease-in-out;
 }
 
+.nav-bar-icon {
+  display: none;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 /* -=-=-=-=-=-=-=-=-=-=-= Nav Bar =-=-=-=-=-=-=-=-=-=-=- */
@@ -533,11 +537,53 @@ footer {
 @media only screen and (max-width: 770px) {
   /* -=-= Nav Bar =-=-*/
   nav {
-    display: none;
+    min-height: 35px;
+    top: 0px;
+    position: fixed;
+    background-color: var(--dark-blue);
+    border: none;
   }
 
-  /* -=-= Home =-=-*/
+  .mobile {
+    display: static;
+  }
 
+  .nav-bar {
+    flex-flow: column;
+    position: fixed;
+    margin: 0 auto;
+    padding: 35px 0px;
+    width: 45%;
+    justify-content: center;
+    background-color: #364d6ba6;
+    right: -100%;
+  }
+
+  .nav-bar a {
+    padding: 10px 15px;
+  }
+
+  .nav-bar-icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    color: white;
+    position: absolute;
+    width: 100vw;
+    background-color: #364d6ba6;
+    height: 40px;
+  }
+
+  .fas {
+    margin-left: 90vw;
+    cursor: pointer;
+  }
+  /* -=-= Home =-=-*/
+  #home {
+    padding-top: 0;
+    margin-top: 0;
+    overflow: hidden;
+  }
   .home-shell {
     font-size: 2rem;
     size: 90%;
