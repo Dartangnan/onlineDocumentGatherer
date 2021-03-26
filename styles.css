@@ -1,0 +1,251 @@
+/* -=-=-=-=-=-=-=-=-=-=-= General Settings =-=-=-=-=-=-=-=-=-=-=- */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --dark-blue: #364d6b;
+  --light-blue: #3f94a8;
+}
+/* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= Nav Bar =-=-=-=-=-=-=-=-=-=-=- */
+.nav-bar {
+  position: relative;
+  display: flex;
+  flex-flow: row;
+  margin: 0 auto -95px;
+  padding: 15px 0px;
+  width: 75%;
+  justify-content: space-between;
+  background-color: none;
+  font-family: Lato;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 300;
+  z-index: 2;
+}
+
+.nav-bar a {
+  cursor: pointer;
+  align-self: center;
+}
+
+.try-it-nav {
+  background-color: var(--light-blue);
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.try-it-nav:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out, width 1.5s ease-in-out;
+}
+.try-it-nav:not(:hover) {
+  transform: scale(1);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= Nav Bar =-=-=-=-=-=-=-=-=-=-=- */
+#home {
+  background-image: url("images/home-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 32px;
+  overflow: hidden;
+  padding-bottom: 10px;
+}
+
+.home-shell {
+  margin: 5% 0 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  font-family: Lato;
+  color: white;
+  font-size: 3rem;
+  height: 80%;
+}
+
+.now-title {
+  font-weight: 300;
+  font-family: Comfortaa;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  background-color: var(--light-blue);
+  padding: 10px 35px 0px;
+  cursor: pointer;
+}
+
+.home-shell h3 {
+  font-size: 2rem;
+  font-weight: 300;
+  font-style: italic;
+  padding: 0;
+  margin: 0;
+}
+
+.one-word {
+  font-weight: 600;
+  /* color: var(--light-blue); */
+  font-style: normal;
+  cursor: pointer;
+}
+
+.horizontal-line {
+  border-bottom: 1px solid white;
+  height: 10px;
+  width: 80%;
+}
+
+.vertical-line {
+  border-right: 1px solid white;
+  height: 40vh;
+  width: 0;
+  max-height: 380px;
+  min-height: 80px;
+}
+
+.home-shell p {
+  font-size: 2rem;
+  margin-bottom: 0;
+}
+
+.learn-more {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Lato;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.arrows {
+  position: relative;
+  width: 80px;
+  animation: float 0.6s infinite alternate;
+  cursor: pointer;
+  bottom: 5px;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(5px);
+  }
+}
+
+/* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= About Us =-=-=-=-=-=-=-=-=-=-=- */
+#about-us {
+  display: grid;
+  place-items: center;
+  /* flex-flow: column; */
+  /* align-items: center; */
+  padding: 50px 0;
+}
+
+#about-us h1 {
+  font-family: Lato;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--dark-blue);
+}
+
+.about-us-shell {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.sub-text {
+  font-family: Lato;
+  width: 50%;
+  min-width: 400px;
+  text-align: justify;
+  text-indent: 25px;
+}
+
+.horizontal-line-dark {
+  border-bottom: 1px solid rgb(88, 88, 88);
+  height: 10px;
+  width: 60%;
+  min-width: 350px;
+  margin-bottom: 4%;
+}
+
+.about-us-cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.about-us-card {
+  width: 250px;
+  margin: 25px 5%;
+  align-self: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Lato;
+}
+
+.about-us-card h4 {
+  font-size: 1.2rem;
+  color: rgb(63, 63, 63);
+  font-weight: bolder;
+}
+
+.about-us-card small {
+  color: rgb(110, 110, 110);
+  text-indent: 25px;
+  text-align: justify;
+}
+/* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= Try It =-=-=-=-=-=-=-=-=-=-=- */
+#try-it {
+  display: grid;
+  place-items: center;
+  background-color: var(--dark-blue);
+  padding: 50px 0;
+}
+
+#try-it h1 {
+  font-family: Lato;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;
+}
+
+.try-it-shell {
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  width: 80%;
+}
+
+/* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
