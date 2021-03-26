@@ -137,6 +137,12 @@ section {
   font-size: 1.2rem;
 }
 
+.learn-more p {
+  border-top: 1px solid white;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
 .arrows {
   position: relative;
   width: 80px;
@@ -211,6 +217,10 @@ section {
   align-items: center;
   justify-content: space-between;
   font-family: Lato;
+  padding: 25px 10px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  box-shadow: 0 10px 5px 0px rgb(182, 182, 182);
 }
 
 .about-us-card h4 {
@@ -222,7 +232,7 @@ section {
 .about-us-card small {
   color: rgb(110, 110, 110);
   text-indent: 25px;
-  text-align: justify;
+  text-align: center;
 }
 /* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
@@ -244,8 +254,141 @@ section {
 .try-it-shell {
   display: flex;
   flex-flow: column;
-  justify-items: center;
-  width: 80%;
+  align-items: center;
+  justify-content: space-between;
 }
 
+.try-it-shell label {
+  font-family: Lato;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-right: 5px;
+}
+
+.cnpj-input {
+  font-size: 1.5rem;
+  font-family: Lato;
+  border-radius: 50px;
+  border: 1px solid white;
+  padding: 2px 5px;
+  text-align: center;
+}
+
+.cnpj-input:focus {
+  outline: none;
+}
+
+.try-it-btn {
+  font-size: 1.5rem;
+  font-family: Lato;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  border: 1px solid white;
+  padding: 2px 15px 2px 40px;
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+.try-it-btn:focus {
+  outline: none;
+}
+
+.loading-img {
+  margin-top: 2%;
+  animation: spin 2s 1s infinite linear;
+  animation-delay: 1;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.horizontal-line-light {
+  border-bottom: 1px solid rgb(255, 255, 255);
+  height: 1px;
+  width: 60%;
+  min-width: 350px;
+  margin-top: 2%;
+}
+
+.try-it-sub-text {
+  font-family: Lato;
+  color: white;
+  width: 50%;
+  min-width: 400px;
+  text-align: justify;
+  text-indent: 25px;
+}
+
+.sample-number {
+  font-family: Lato;
+  color: rgba(255, 255, 255, 0.233);
+  font-size: 1.7rem;
+}
+
+.img-hidden {
+  opacity: 0;
+}
+/* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= Try It =-=-=-=-=-=-=-=-=-=-=- */
+#other-documents {
+  display: grid;
+  place-items: center;
+  padding: 50px 0;
+}
+
+#other-documents h1 {
+  font-family: Lato;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--dark-blue);
+}
+
+.other-documents-shell {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 75%;
+}
+
+.doc-card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px;
+  margin: 0px 20px 45px;
+  padding: 20px 45px;
+  /* border-radius: 35px; */
+  border-top-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  box-shadow: 0px 0px 25px 8px rgba(19, 19, 19, 0.158);
+}
+
+.doc-card h4 {
+  font-size: 1.2rem;
+  font-family: Lato;
+  color: rgb(63, 63, 63);
+  font-weight: bolder;
+  text-align: center;
+}
+
+.doc-card small {
+  color: rgb(110, 110, 110);
+  text-indent: 25px;
+  text-align: center;
+}
+
+.more {
+  justify-content: flex-start;
+}
 /* -=-.=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
