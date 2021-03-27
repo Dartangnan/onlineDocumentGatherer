@@ -13,6 +13,11 @@ section {
   --dark-blue: #364d6b;
   --light-blue: #3f94a8;
 }
+
+.section-hidden {
+  opacity: 0;
+  transform: translateY(7rem);
+}
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 /* -=-=-=-=-=-=-=-=-=-=-= Nav Bar =-=-=-=-=-=-=-=-=-=-=- */
@@ -382,15 +387,16 @@ section {
 
 .cards-text h4 {
   font-size: 1.2rem;
-  font-family: Lato;
   color: rgb(63, 63, 63);
   font-weight: bolder;
+  font-family: Lato;
   text-align: center;
 }
 
 .cards-text p {
   color: rgb(110, 110, 110);
   text-indent: 25px;
+  font-family: Lato;
   text-align: justify;
 }
 .cards-text-small {
@@ -646,6 +652,7 @@ footer {
 
   .cards-text p {
     color: rgb(224, 222, 222);
+    font-family: lato;
     text-align: justify;
     width: 80%;
     margin-top: -15px;
@@ -666,29 +673,30 @@ footer {
     background-color: #3f95a8d2;
     opacity: 0;
   }
-}
-/* -=-= Contact Us =-=-*/
 
-.contact-us-form {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto;
-}
+  /* -=-= Contact Us =-=-*/
 
-.contact-us-form {
-  width: 60%;
-  padding: 25px 15px;
-  margin-top: 15px;
-}
+  .contact-us-form {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+  }
 
-.form-item-email {
-  grid-row: 3/4;
-  grid-column: 1/2;
-}
+  .contact-us-form {
+    width: 60%;
+    padding: 25px 15px;
+    margin-top: 15px;
+  }
 
-.btn-contact-us {
-  grid-row: 4/5;
-  grid-column: 1/2;
+  .form-item-email {
+    grid-row: 3/4;
+    grid-column: 1/2;
+  }
+
+  .btn-contact-us {
+    grid-row: 4/5;
+    grid-column: 1/2;
+  }
 }
 
 /*--------------------*/

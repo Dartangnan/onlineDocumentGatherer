@@ -9,7 +9,10 @@ const navBarIcon = document.querySelector(".fas");
 const body = document.querySelector("body");
 const navBarMobile = document.querySelector(".nav-bar-icon");
 const cardsFutureDoc = document.querySelectorAll(".doc-card ");
-
+const aboutUsSection = document.getElementById("about-us");
+const hearFromUsSection = document.getElementById("hear-from-us");
+const tryItSection = document.getElementById("try-it");
+const futureFunctionSection = document.getElementById("other-documents");
 /* ---- Other variables ----*/
 let navBarShowing = 0;
 let oldPos = 0;
@@ -149,5 +152,59 @@ window.addEventListener("resize", function () {
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 /* -=-=-=-=-=-=-=-=-=-=-= Lazy Loading =-=-=-=-=-=-=-=-=-=-=- */
+const addInterserctionObserver = function () {
+  const lazyLoading = function (entries, observer) {
+    const [entry] = entries;
+    if (entry.isIntersecting && entry.IntersectingRatio !== 1) {
+      entry.target.style.transition = "opacity 1s, transform 1s";
+      entry.target.classList.remove("section-hidden");
+      if (entry.target === aboutUsSection) {
+        let time = 0;
+        const cards = aboutUsSection.querySelectorAll(".about-us-card");
+        cards.forEach((card) => {
+          time++;
+          setTimeout(function () {
+            card.style.transition = "opacity 1s, transform 1s";
+            card.classList.remove("section-hidden");
+          }, 300 * time);
+        });
+      }
+      if (entry.target === futureFunctionSection) {
+        let time = 0;
+        const cards = futureFunctionSection.querySelectorAll(".doc-card");
+        console.log(cards);
+        cards.forEach((card) => {
+          time++;
+          setTimeout(function () {
+            card.style.transition = "opacity 1s, transform 1s";
+            card.classList.remove("section-hidden");
+
+            console.log(time);
+          }, 300 * time);
+        });
+        observer.unobserve(entry.target);
+      }
+    }
+  };
+
+  const options = {
+    root: null,
+    threshold: 0.15,
+  };
+
+  return new IntersectionObserver(lazyLoading, options);
+};
+
+const allSections = [
+  aboutUsSection,
+  hearFromUsSection,
+  tryItSection,
+  futureFunctionSection,
+];
+
+allSections.forEach((sec) => {
+  sec.classList.add("section-hidden");
+  addInterserctionObserver().observe(sec);
+});
 
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
