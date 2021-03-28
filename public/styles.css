@@ -305,9 +305,28 @@ section {
 }
 
 .loading-img {
+  opacity: 0;
   margin-top: 2%;
   animation: spin 2s 1s infinite linear;
-  animation-delay: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.download-form {
+  margin-top: 2%;
+  background-color: none;
+}
+
+.download-form button {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  cursor: pointer;
+}
+
+.download-form button:focus {
+  outline: none;
 }
 
 @keyframes spin {

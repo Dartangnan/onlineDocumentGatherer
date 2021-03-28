@@ -13,6 +13,7 @@ const aboutUsSection = document.getElementById("about-us");
 const hearFromUsSection = document.getElementById("hear-from-us");
 const tryItSection = document.getElementById("try-it");
 const futureFunctionSection = document.getElementById("other-documents");
+const tryItBtn = document.querySelector("try-it-btn");
 /* ---- Other variables ----*/
 let navBarShowing = 0;
 let oldPos = 0;
@@ -22,9 +23,7 @@ let navHeight = 0;
 /* -=-=-=-=-=-=-=-=-=-=-= Nav Btns =-=-=-=-=-=-=-=-=-=-=- */
 
 // Nav Bar elements:
-console.log("hi");
 navBarBtns.forEach((btn) => {
-  console.log(btn.textContent.replaceAll(" ", "-").toLowerCase());
   btn.addEventListener("click", function () {
     document
       .getElementById(`${btn.textContent.replaceAll(" ", "-").toLowerCase()}`)
@@ -54,7 +53,6 @@ navBarIcon.addEventListener("click", function () {
 });
 
 body.addEventListener("click", function (e) {
-  console.log(e.target);
   if (window.innerWidth >= 770 || e.target.classList.contains("fas")) return;
   navBar.style.transition = "transform 1s";
   navBar.style.transform = "translateX(100%)";
@@ -76,13 +74,11 @@ window.onscroll = function () {
     return;
   }
   if (pageYOffset < oldPos) {
-    console.log(navHeight);
     navHeight >= 0 ? (navHeight = 0) : (navHeight += 10);
     navBarMobile.style.transform = `translateY(${navHeight}%)`;
     oldPos = pageYOffset;
   }
   if (pageYOffset > oldPos) {
-    console.log(navHeight);
     navHeight <= -100 ? (navHeight = -100) : (navHeight -= 10);
     navBarMobile.style.transform = `translateY(${navHeight}%)`;
     oldPos = pageYOffset;
@@ -100,58 +96,61 @@ window.addEventListener("resize", function () {
       });
     });
   }
-
-  /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
-
-  /* -=-=-=-=-=-=-=-=-=-=-= Future Projects Section =-=-=-=-=-=-=-=-=-=-=- */
-  cardsFutureDoc.forEach((card) => {
-    card.addEventListener("mouseover", function () {
-      let cardMask = card.querySelector(".cards-text");
-      cardMask.style.transition = "transform 2s, opacity 1s";
-      cardMask.style.opacity = "1";
-      [...cardMask.children].forEach((el) => {
-        setTimeout(function () {
-          el.style.transform = "scale(1,1)";
-          el.style.transition = "transform 1s";
-        }, 100);
-      });
-    });
-  });
-
-  cardsFutureDoc.forEach((card) => {
-    card.addEventListener("mouseout", function () {
-      if (innerWidth > 770) {
-        return;
-      }
-      let cardMask = card.querySelector(".cards-text");
-      cardMask.style.transition = "transform 2s, opacity 1s";
-      cardMask.style.opacity = "0";
-      [...cardMask.children].forEach((el) => {
-        setTimeout(function () {
-          el.style.transform = "scale(0.5,0.5)";
-          el.style.transition = "transform 1s";
-        }, 100);
-      });
-    });
-  });
-
-  /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
-
-  /* -=-=-=-=-=-=-=-=-=-=-= Reset settings when changing view width from mobile to desktop =-=-=-=-=-=-=-=-=-=-=- */
-  if (window.innerWidth < 770) {
-    cardsFutureDoc.forEach((card) => {
-      card.querySelector(".cards-text").style.opacity = "0";
-      [...card.querySelector(".cards-text").children].forEach((el) => {
-        el.style.transform = "scale(0.5,0.5)";
-        el.style.transition = "transform 1s";
-      });
-    });
-  }
 });
 
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
+/* -=-=-=-=-=-=-=-=-=-=-= Future Projects Section =-=-=-=-=-=-=-=-=-=-=- */
+cardsFutureDoc.forEach((card) => {
+  card.addEventListener("mouseover", function () {
+    console.log("in");
+    let cardMask = card.querySelector(".cards-text");
+    cardMask.style.transition = "transform 2s, opacity 1s";
+    cardMask.style.opacity = "1";
+    [...cardMask.children].forEach((el) => {
+      setTimeout(function () {
+        el.style.transform = "scale(1,1)";
+        el.style.transition = "transform 1s";
+      }, 100);
+    });
+  });
+});
+
+cardsFutureDoc.forEach((card) => {
+  card.addEventListener("mouseout", function () {
+    console.log("out");
+    if (innerWidth > 770) {
+      return;
+    }
+    let cardMask = card.querySelector(".cards-text");
+    cardMask.style.transition = "transform 2s, opacity 1s";
+    cardMask.style.opacity = "0";
+    [...cardMask.children].forEach((el) => {
+      setTimeout(function () {
+        el.style.transform = "scale(0.5,0.5)";
+        el.style.transition = "transform 1s";
+      }, 100);
+    });
+  });
+});
+
+/* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* -=-=-=-=-=-=-=-=-=-=-= Reset settings when changing view width from mobile to desktop =-=-=-=-=-=-=-=-=-=-=- */
+if (window.innerWidth < 770) {
+  cardsFutureDoc.forEach((card) => {
+    card.querySelector(".cards-text").style.opacity = "0";
+    [...card.querySelector(".cards-text").children].forEach((el) => {
+      el.style.transform = "scale(0.5,0.5)";
+      el.style.transition = "transform 1s";
+    });
+  });
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
 /* -=-=-=-=-=-=-=-=-=-=-= Lazy Loading =-=-=-=-=-=-=-=-=-=-=- */
+
 const addInterserctionObserver = function () {
   const lazyLoading = function (entries, observer) {
     const [entry] = entries;
@@ -172,14 +171,11 @@ const addInterserctionObserver = function () {
       if (entry.target === futureFunctionSection) {
         let time = 0;
         const cards = futureFunctionSection.querySelectorAll(".doc-card");
-        console.log(cards);
         cards.forEach((card) => {
           time++;
           setTimeout(function () {
             card.style.transition = "opacity 1s, transform 1s";
             card.classList.remove("section-hidden");
-
-            console.log(time);
           }, 300 * time);
         });
         observer.unobserve(entry.target);
@@ -208,3 +204,14 @@ allSections.forEach((sec) => {
 });
 
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+setTimeout(function () {
+  //   document.querySelector(".loading-img").style.animation =
+  //     "spin 2s 1s infinite linear";
+
+  document.querySelector(".loading-img").style.opacity = "1";
+}, 4000);
+
+setTimeout(function () {
+  document.querySelector(".loading-img").classList.add("hidden");
+  document.querySelector(".download-form").classList.remove("hidden");
+}, 8000);

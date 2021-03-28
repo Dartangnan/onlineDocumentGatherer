@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Google Fonts =-=-=-=-=-=-=-=-=-=-=- -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Font Awesome - NavBar Icon =-=-=-=-=-=-=-=-=-=-=- -->
+    <script
+    src="https://kit.fontawesome.com/4cec228884.js"
+    crossorigin="anonymous"
+  ></script>
+
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Favicon =-=-=-=-=-=-=-=-=-=-=- -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="public/images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="public/images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="public/images/favicon-16x16.png"
+    />
+
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Styles Sheet =-=-=-=-=-=-=-=-=-=-=- -->
+    <link rel="stylesheet" href="/styles.css" />
+
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Title of the page =-=-=-=-=-=-=-=-=-=-=- -->
+    <title>AutoMTK App</title>
+  </head>
+  <body>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Nav Bar =-=-=-=-=-=-=-=-=-=-=- -->
+    <nav>
+      <div class="nav-bar">
+        <a>Home</a>
+        <a>About Us</a>
+        <a class="try-it-nav">Try It</a>
+        <a>Hear From Us</a>
+      </div>
+      <span class="nav-bar-icon"><i class="fas fa-bars"></i></span>
+    </nav>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Home =-=-=-=-=-=-=-=-=-=-=- -->
+    <section id="home">
+      <div class="home-shell">
+        <h1>AUTOMATE YOUR COMPANY <br /><span class="now-title">NOW</span></h1>
+        <h3>
+          Gather all your fiscal documents with
+          <span class="one-word">ONE</span> click.
+        </h3>
+        <div class="horizontal-line"></div>
+        <div class="vertical-line"></div>
+      </div>
+      <div class="learn-more">
+        <p>Learn More</p>
+        <img class="arrows" src="/images/arrows.png" />
+      </div>
+    </section>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= About Us =-=-=-=-=-=-=-=-=-=-=- -->
+    <section id="about-us">
+      <h1>About Us</h1>
+      <div class="about-us-shell">
+        <p class="sub-text">
+          We are a company that brings the <strong>optimization</strong> and
+          functionalities that <strong>your business</strong> need. We are spe
+          cialized in <strong>accountants</strong> that want to turn the massive
+          tasks of collecting online documents for your cli ents into a
+          <strong>easy</strong> and straight forward
+          <strong>experience</strong> that can turn hours of work into
+          <strong>minutes</strong>
+          of wait.
+        </p>
+        <div class="horizontal-line-dark"></div>
+        <div class="about-us-cards">
+          <div class="about-us-card section-hidden">
+            <img src="/images/multiple_files.png" />
+            <h4>Multiple Files</h4>
+            <small
+              >You can retrieve multiple files at the same time using only one
+              tool. Then, they’re all available for you to download.
+            </small>
+          </div>
+          <div class="about-us-card section-hidden">
+            <img src="/images/contact_icon.png" />
+            <h4>Diversity of Clients</h4>
+            <small
+              >Unlimited number of CNPJ numbers can be checked everyday to
+              attend your client base allowing difersification.
+            </small>
+          </div>
+          <div class="about-us-card section-hidden">
+            <img src="/images/locker.png" />
+            <h4>Security</h4>
+            <small
+              >We guarantee the security of the content and accuracy of the
+              files that we provide to your company.
+            </small>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Try it =-=-=-=-=-=-=-=-=-=-=- -->
+    <section id="try-it">
+      <h1>Try it</h1>
+      <div class="try-it-shell">
+        <form method="post" action="/">
+          <label>CNPJ:</label>
+          <input
+            class="cnpj-input"
+            type="text"
+            placeholder="__.___.___/____-__"
+          />
+          <input class="try-it-btn" type="submit" name="" id="" />
+        </form>
+        <form class='download-form hidden' mehotd='get' action="docPath">
+          <button class=''><img src="/images/loaded.png" alt="" /></button>
+
+        </form>
+
+        <div class="loading-img">
+          <img src="/images/loading.png" alt="" />
+        </div>
+        <div class="horizontal-line-light"></div>
+        <p class="try-it-sub-text">
+          With our tool<strong></strong> you are able to retrieve data using our
+          server and donwload it right away. With this sample, you can input the
+          <strong>CNPJ</strong> of the company that you will
+          <strong>download</strong> the certificate of debts related to
+          <strong>Federal Tax Credits and the Union's Active Debt</strong>. This
+          is just one of the many documents that you can retrieve if you create
+          your <strong>account</strong> and sign up for our product
+        </p>
+        <p class="sample-number">CNPJ SAMPLE: 27.865.757/0001-02</p>
+      </div>
+    </section>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Other Documents =-=-=-=-=-=-=-=-=-=-=- -->
+    <section id="other-documents">
+      <h1>Future Functionalities</h1>
+      <div class="horizontal-line-dark"></div>
+      <div class="other-documents-shell">
+        <div class="doc-card">
+          <img src="/images/revenue_service_logo.png" alt="" />
+          <div class='cards-text'>
+          <h4>Internal Revenue Service</h4>
+          <p class='cards-text-small'
+            >Issued by the Federal Revenue Service, this negative certificate
+            will be released when the taxpayer 's tax compliance with the
+            federal tax credits administered by the Federal Revenue Service of
+            Brazil - RFB</p
+          >
+        </div>
+        </div>
+        <div class="doc-card section section-hidden">
+          <img src="/images/caixa-logo.png" alt="" />
+          
+          <div class='cards-text'>
+          <h4>Employer Regularity Consultation</h4>
+          <p
+            >Issued by Caixa Econômica Federal, this certificate is a condition
+            for the entrepreneur to be able to relate with the Public
+            Administration bodies and with official credit institutions.</p
+          >
+          </div>
+        </div>
+        <div class="doc-card section-hidden">
+          <img src="/images/brazil-logo.png" alt="" />
+                    <div class='cards-text'>
+          <h4>State Debt Clearance </h4>
+          <p
+            >This certificate will be issued when the taxpayer's tax compliance
+            with the state tax credits administered by the State Finance
+            Secretariat is verified. Therefore, each state has its own criteria.</p
+          >
+          </div>
+        </div>
+        <div class="doc-card section-hidden">
+          <img src="/images/tje-logo.png" alt="" />
+          <div class='cards-text'>
+          <h4>Certificate of Labor Debts</h4>
+          <p
+            >Issued by the Superior Labor Court, this certificate is based on
+            information submitted by all Regional Labor Courts in the country
+            and will be negative when individual or legal entity is not
+            registered as a debtor. </p
+          >
+          </div>
+        </div>
+        <div class="doc-card section-hidden">
+          <img src="/images/building-icon.png" alt="" />
+          <div class='cards-text'>
+          <h4>Real Estate Taxes Certificate</h4>
+          <p
+            >This certificate is a document issued by of each municipality. It is based on data of the Register of
+            Taxpayers' Securities, which includes Legal Entities
+            that carry out activities in a given municipality.</p
+          >
+          </div>
+        </div>
+        <div class="doc-card more section-hidden">
+          <img src="/images/plus-icon.png" alt="" />
+          <div class='cards-text'>
+          <h4>More...</h4>
+          <p
+            >We keep improving our product and implementing other
+            certificates.</p
+          >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Contact Us =-=-=-=-=-=-=-=-=-=-=- -->
+    <section id="hear-from-us">
+      <h1>Hear From Us</h1>
+      <div class="contact-us-shell">
+        <p>
+          We are still working in our tool to make it
+          <strong>available</strong> for you as soon as possible. Would you like
+          to have access to more <strong>information</strong> and receive an
+          <strong>e-mail</strong> when we have it everything available? Leave
+          your <strong>information</strong> underneath and
+          <strong>hear from us</strong> with all usefull information
+        </p>
+        
+      <div class="horizontal-line-dark"></div>
+        <form class='contact-us-form'method="post" action="/">
+          <div class="form-item-name">
+            <label " for="">Name:</label> <input type="text type="text" />
+          </div>
+          <div class="form-item-phone">
+            <label  for="">Telephone:</label> <input type="tel" type="text" />
+          </div>
+          <div class="form-item-email">
+            <label  for="">E-mail:</label> <input type="email" type="text" />
+          </div>
+          <input class='btn-contact-us' type='submit' >
+        </form>
+      </div>
+    </section>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Footer =-=-=-=-=-=-=-=-=-=-=- -->
+    <footer></footer>
+    <!-- -=-=-=-=-=-=-=-=-=-=-= Script JS file =-=-=-=-=-=-=-=-=-=-=- -->
+    <script src="/script.js"></script>
+  </body>
+</html>
