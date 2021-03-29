@@ -304,6 +304,11 @@ section {
   outline: none;
 }
 
+.error-msg {
+  color: white;
+  font-family: Lato;
+}
+
 .loading-img {
   opacity: 0;
   margin-top: 2%;

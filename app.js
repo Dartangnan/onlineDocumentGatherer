@@ -31,9 +31,45 @@ const validateCNPJ = function (cnpj) {
     .replace(/\./g, "")
     .replace(/\-/g, "")
     .replace(/\s/g, "");
-
+  //Checking number of digits
   let cnpjSize = newCNPJ.length;
-  newCNPJ = +newCNPJ;
+  if (cnpjSize !== 14)
+    return "Error! The length of the CNPJ entered is not valid!";
+
+  //Checking if there are invalid characters
+  newCNPJNumber = +newCNPJ;
+  if (typeof newCNPJNumber !== "number")
+    return "Error! Input contains invalid characters!";
+  // Validating the CNPJ pattern
+  //http://www.macoratti.net/alg_cnpj.htm#:~:text=Algoritmo%20para%20valida%C3%A7%C3%A3o%20do%20CNPJ&text=O%20n%C3%BAmero%20que%20comp%C3%B5e%20o,que%20s%C3%A3o%20os%20d%C3%ADgitos%20verificadores.
+  // Two last digits:
+  n1 = Math.trunc((newCNPJ % 100) / 10);
+  n2 = newCNPJ % 10;
+  console.log(n1, n2);
+  // Vectors used to validate:
+  arrayToBeValidated = newCNPJ.slice(0, -2).split("");
+  validationVectorOne = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+  validationVectorTwo = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+  //Checking if the numbers meet the CNPJ creation logic/algorithm
+  sum1 = validationVectorOne
+    .map((el, index) => {
+      return el * +arrayToBeValidated[index];
+    })
+    .reduce((acc, val) => acc + val);
+  validDigit1 = sum1 % 11 < 2 ? 0 : 11 - (sum1 % 11);
+  sizeArray = arrayToBeValidated.push(validDigit1);
+
+  sum2 = validationVectorTwo
+    .map((el, index) => {
+      return el * +arrayToBeValidated[index];
+    })
+    .reduce((acc, val) => acc + val);
+  validDigit2 = sum2 % 11 < 2 ? 0 : 11 - (sum2 % 11);
+
+  if (validDigit1 !== n1 || validDigit2 !== n2)
+    return "Error! Invalid CNPJ number!";
+  return newCNPJNumber;
 };
 
 const postRequestCaptcha = async function () {
@@ -100,21 +136,36 @@ const fetchCertificate = async function (cnpj) {
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= GET requests =-=-=-=-=-=-=-
+let dataError = { answerCNPJ: "" };
 app.get("/", function (req, res) {
-  res.render("home");
+  res.render("home", dataError);
+});
+
+app.get("/cnpj-check/:cnpj", function (req, res) {
+  console.log(req.params);
+  ans = validateCNPJ(req.params.cnpj);
+  res.send({ answerCNPJ: ans });
 });
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= POST requests =-=-=-=-=-=-=-
-app.post("/", function (req, res) {
-  let cnpj = req.body.cnpj;
+// app.post("/cnpj-check", function (req, res) {
+//   let cnpj = req.body.cnpj;
 
-  console.log(newCNPJ, cnpjSize);
-  console.log(typeof newCNPJ);
+//   ans = validateCNPJ(cnpj);
+//   dataError = { answerCNPJ: ans };
+//   //   if (typeof ans === "string") {
+//   //     res.render("home", { answerCNPJ: ans });
+//   //     console.log(res);
+//   //   }
+//   //   if (typeof ans === "number") {
+//   //     console.log(res);
+//   //     res.render("home", { answerCNPJ: ans });
+//   //   }
+//   //   fetchCertificate(cnpj);
+// });
 
-  //   fetchCertificate(cnpj);
-});
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= server port requests =-=-=-=-=-=-=-

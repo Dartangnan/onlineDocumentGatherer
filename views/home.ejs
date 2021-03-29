@@ -121,7 +121,7 @@
     <section id="try-it">
       <h1>Try it</h1>
       <div class="try-it-shell">
-        <form method="post" action="/">
+        <form id='cnpj-form' method="post" action="">
           <label>CNPJ:</label>
           <input
             class="cnpj-input"
@@ -129,8 +129,9 @@
             name='cnpj'
             placeholder="__.___.___/____-__"
           />
-          <input class="try-it-btn" type="submit" name="" id="" />
+          <input class="try-it-btn" type="button" name="botao" id="" value='Send' />
         </form>
+        <p class='error-msg'><%=answerCNPJ%></p>
         <form class='download-form hidden' mehotd='get' action="docPath">
           <button class=''><img src="/images/loaded.png" alt="" /></button>
 
