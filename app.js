@@ -1,4 +1,5 @@
 // -=-=-=-=-=-= Importing modules =-=-=-=-=-=-=-
+require("dotenv").config();
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -80,7 +81,7 @@ const postRequestCaptcha = async function () {
     const imgBase64 = Buffer.from(captchaImg).toString("base64");
     // Post request to 2captcha so they can solve it
     const idRes = await axios.post(
-      "http://2captcha.com/in.php?key=7aa7004be5c01067ea34dc565802f656",
+      `http://2captcha.com/in.php?key=${process.env.APIKEY}`,
       {
         method: "base64",
         body: imgBase64,
@@ -97,7 +98,7 @@ const postRequestCaptcha = async function () {
 const getRequestCaptcha = async function (idEl) {
   // Get request to 2Captcha so we can get the text corresponding to the captcha
   const crackedCaptcha = await axios.get(
-    `https://2captcha.com/res.php?key=7aa7004be5c01067ea34dc565802f656&action=get&json=1&id=${idEl}`
+    `https://2captcha.com/res.php?key=${process.env.APIKEY}&action=get&json=1&id=${idEl}`
   );
   return crackedCaptcha.data.request;
 };
@@ -111,7 +112,7 @@ const fetchCertificate = async function (ans) {
       await page.waitForTimeout(1000);
       //   await newPage.screenshot({ path: "public/page.png", fullPage: true });
       await newPage.emulateMedia({ media: "screen" });
-      await newPage.pdf({ path: "public/page.pdf" });
+      await newPage.pdf({ path: __dirname + "public/page.pdf" });
       await browser.close();
     });
     await page.goto(
