@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const { chromium } = require("playwright");
 const fs = require("fs");
 const axios = require("axios");
+const mongoose = require("mongoose");
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -21,6 +22,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Define the static files folder
 app.use(express.static(__dirname + "/public"));
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+// -=-=-=-=-=-= Database =-=-=-=-=-=-=-
+mongoose.connect("mongodb://localhost:27017/contactsDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const contactSchema = new mongoose.Schema({
+  name: String,
+  phone: String,
+  email: String,
+});
+
+const Contact = mongoose.model("contact", contactSchema);
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -165,28 +182,28 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
 
 app.get("/download", function (req, res) {
   const file = `${__dirname}/public/page.pdf`;
-  res.download(file); // Set disposition and send it.
+  res.download(file);
 });
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= POST requests =-=-=-=-=-=-=-
-// app.post("/cnpj-check", function (req, res) {
-//   let cnpj = req.body.cnpj;
 
-//   ans = validateCNPJ(cnpj);
-//   dataError = { answerCNPJ: ans };
-//   //   if (typeof ans === "string") {
-//   //     res.render("home", { answerCNPJ: ans });
-//   //     console.log(res);
-//   //   }
-//   //   if (typeof ans === "number") {
-//   //     console.log(res);
-//   //     res.render("home", { answerCNPJ: ans });
-//   //   }
-//   //   fetchCertificate(cnpj);
-// });
+app.post("/save-contact", function (req, res) {
+  info = req.body;
+  console.log(req.body);
 
+  const contact = new Contact({
+    name: req.body.name,
+    phone: req.body.phone,
+    email: req.body.email,
+  });
+
+  console.log(contact);
+  res.redirect("/");
+
+  // contact.save();
+});
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= server port requests =-=-=-=-=-=-=-
