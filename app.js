@@ -31,21 +31,22 @@ const validateCNPJ = function (cnpj) {
     .replace(/\./g, "")
     .replace(/\-/g, "")
     .replace(/\s/g, "");
+
+  //Checking if there are invalid characters
+  newCNPJNumber = +newCNPJ;
+  if (typeof newCNPJNumber !== "number" || isNaN(newCNPJNumber))
+    return "Error! Input contains invalid characters!";
+
   //Checking number of digits
   let cnpjSize = newCNPJ.length;
   if (cnpjSize !== 14)
     return "Error! The length of the CNPJ entered is not valid!";
 
-  //Checking if there are invalid characters
-  newCNPJNumber = +newCNPJ;
-  if (typeof newCNPJNumber !== "number")
-    return "Error! Input contains invalid characters!";
   // Validating the CNPJ pattern
   //http://www.macoratti.net/alg_cnpj.htm#:~:text=Algoritmo%20para%20valida%C3%A7%C3%A3o%20do%20CNPJ&text=O%20n%C3%BAmero%20que%20comp%C3%B5e%20o,que%20s%C3%A3o%20os%20d%C3%ADgitos%20verificadores.
   // Two last digits:
   n1 = Math.trunc((newCNPJ % 100) / 10);
   n2 = newCNPJ % 10;
-  console.log(n1, n2);
   // Vectors used to validate:
   arrayToBeValidated = newCNPJ.slice(0, -2).split("");
   validationVectorOne = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
@@ -101,7 +102,7 @@ const getRequestCaptcha = async function (idEl) {
   return crackedCaptcha.data.request;
 };
 
-const fetchCertificate = async function (cnpj) {
+const fetchCertificate = async function (ans) {
   try {
     const browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
@@ -116,7 +117,7 @@ const fetchCertificate = async function (cnpj) {
     await page.goto(
       "https://servicos.receita.fazenda.gov.br/Servicos/certidao/CNDConjuntaInter/InformaNICertidao.asp?tipo=1"
     );
-    await page.fill('input[name="NI"]', cnpj);
+    await page.fill('input[name="NI"]', ans);
     // The captcha is reloaded once, so we wait 1s until the new image is shown
     await page.waitForTimeout(1000);
     const svgImage = await page.$("#imgCaptchaSerpro");
@@ -129,8 +130,9 @@ const fetchCertificate = async function (cnpj) {
     await page.click("#submit1");
     await page.click('"Emissão de nova certidão"');
     await page.click('img[alt="Preparar Página para Impressão"]');
+    return true;
   } catch (err) {
-    console.log(err);
+    return false;
   }
 };
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -142,9 +144,27 @@ app.get("/", function (req, res) {
 });
 
 app.get("/cnpj-check/:cnpj", function (req, res) {
-  console.log(req.params);
   ans = validateCNPJ(req.params.cnpj);
-  res.send({ answerCNPJ: ans });
+  if (typeof ans === "string") {
+    res.send({ answerCNPJ: ans, pdfFile: false });
+  }
+  if (typeof ans === "number") {
+    fetchCertificate(`${ans}`).then((a) => {
+      if (!a) {
+        res.send({
+          answerCNPJ: "Ops! Something went wrong, please try again!",
+          pdfFile: a,
+        });
+      } else {
+        res.send({ answerCNPJ: "", pdfFile: a });
+      }
+    });
+  }
+});
+
+app.get("/download", function (req, res) {
+  const file = `${__dirname}/public/page.pdf`;
+  res.download(file); // Set disposition and send it.
 });
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

@@ -18,6 +18,7 @@ const tryItBtn = document.querySelector(".try-it-btn");
 let navBarShowing = 0;
 let oldPos = 0;
 let navHeight = 0;
+let btnClicked = 0;
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 /* -=-=-=-=-=-=-=-=-=-=-= Nav Btns =-=-=-=-=-=-=-=-=-=-=- */
@@ -205,44 +206,50 @@ allSections.forEach((sec) => {
 
 /* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
-/* Validation of the CNPJ */
-/*
+/* -=-=-=-=-=-=-=-=-=-=-= Validatio of the CNPJ and retrieve PDF =-=-=-=-=-=-=-=-=-=-=- */
+
 tryItBtn.addEventListener("click", async (e) => {
-  const response = await fetch("/", { method: "POST" });
-  const data = await response.json();
-  console.log(data);
-  document.querySelector(".error-msg").textContent = data;
-  //   e.preventDefault();
-});
-*/
-setTimeout(function () {
-  //   document.querySelector(".loading-img").style.animation =
-  //     "spin 2s 1s infinite linear";
-
-  document.querySelector(".loading-img").style.opacity = "1";
-}, 4000);
-
-setTimeout(function () {
-  document.querySelector(".loading-img").classList.add("hidden");
-  document.querySelector(".download-form").classList.remove("hidden");
-}, 8000);
-
-// tryItBtn.addEventListener("click", function (e) {
-//   //   e.preventDefault();
-//   //   document.getElementById("cnpj-form").submit();
-//   console.log(e);
-// });
-tryItBtn.addEventListener("click", async (e) => {
-  console.log(document.querySelector(".cnpj-input").value);
+  document.querySelector(".loading-img").classList.remove("hidden");
+  document.querySelector(".download-form").classList.add("hidden");
+  document.querySelector(".error-msg").textContent = "";
+  document.querySelector(".loading-img").style.opacity = "0";
+  // In case the back-end is retrieving the pdf and the user keeps clicking the button
+  if (btnClicked !== 0) {
+    document.querySelector(".error-msg").textContent =
+      "We are working on it, just few more seconds...";
+    return;
+  }
+  // ----------------------
 
   let cnpj = await document
     .querySelector(".cnpj-input")
     .value.replaceAll("/", "");
-  console.log("in");
+  if (cnpj === "") {
+    document.querySelector(".error-msg").textContent = "Empty entry";
+    return;
+  }
+  btnClicked = 1;
+  document.querySelector(".loading-img").style.opacity = "1";
   const msgJSON = await (await fetch(`/cnpj-check/${cnpj}`)).json();
-  console.log(msgJSON);
-  //   const msg = msgJSON.json();
-  document.querySelector(".error-msg").textContent = await msgJSON.answerCNPJ;
-  //   console.log(e);
-  //   console.log(e.json());
+  document.querySelector(".loading-img").style.opacity = "0";
+  if (!msgJSON.pdfFile) {
+    document.querySelector(".error-msg").textContent = await msgJSON.answerCNPJ;
+    btnClicked = 0;
+    return;
+  }
+  const pdfPath = msgJSON.pdfFile;
+  document.querySelector(".loading-img").classList.add("hidden");
+  document.querySelector(".download-form").classList.remove("hidden");
+  btnClicked = 0;
 });
+
+/* -=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+// setTimeout(function () {
+//   document.querySelector(".loading-img").style.opacity = "1";
+// }, 4000);
+
+// setTimeout(function () {
+//   document.querySelector(".loading-img").classList.add("hidden");
+//   document.querySelector(".download-form").classList.remove("hidden");
+// }, 8000);
