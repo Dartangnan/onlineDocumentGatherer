@@ -125,7 +125,10 @@ const getRequestCaptcha = async function (idEl) {
 
 const fetchCertificate = async function (ans) {
   try {
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({
+      headless: true,
+      chromiumSandbox: false,
+    });
     const context = await browser.newContext();
     const page = await context.newPage();
     context.on("page", async (newPage) => {
