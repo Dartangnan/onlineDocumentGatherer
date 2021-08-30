@@ -209,16 +209,17 @@ allSections.forEach((sec) => {
 /* -=-=-=-=-=-=-=-=-=-=-= Validatio of the CNPJ and retrieve PDF =-=-=-=-=-=-=-=-=-=-=- */
 
 tryItBtn.addEventListener("click", async (e) => {
-  document.querySelector(".loading-img").classList.remove("hidden");
-  document.querySelector(".download-form").classList.add("hidden");
-  document.querySelector(".error-msg").textContent = "";
-  document.querySelector(".loading-img").style.opacity = "0";
   // In case the back-end is retrieving the pdf and the user keeps clicking the button
   if (btnClicked !== 0) {
     document.querySelector(".error-msg").textContent =
       "We are working on it, just few more seconds...";
     return;
   }
+  document.querySelector(".loading-img").classList.remove("hidden");
+  document.querySelector(".download-form").classList.add("hidden");
+  document.querySelector(".error-msg").textContent = "It can take about 20s";
+  document.querySelector(".loading-img").style.opacity = "0";
+
   // ----------------------
 
   let cnpj = await document

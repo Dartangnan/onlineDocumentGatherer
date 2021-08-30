@@ -26,10 +26,13 @@ app.use(express.static(__dirname + "/public"));
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= Database =-=-=-=-=-=-=-
-mongoose.connect("mongodb://localhost:27017/contactsDB", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  `mongodb+srv://admin-dart:${process.env.DB}@cluster0.olp8q.mongodb.net/contactsDB`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const contactSchema = new mongoose.Schema({
   name: String,
@@ -202,12 +205,12 @@ app.post("/save-contact", function (req, res) {
   console.log(contact);
   res.redirect("/");
 
-  // contact.save();
+  contact.save();
 });
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 // -=-=-=-=-=-= server port requests =-=-=-=-=-=-=-
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Listening on port 3000.");
 });
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
