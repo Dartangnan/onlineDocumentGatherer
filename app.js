@@ -122,14 +122,22 @@ const getRequestCaptcha = async function (idEl) {
   );
   return crackedCaptcha.data.request;
 };
-
+let path = "";
 const fetchCertificate = async function (ans) {
   try {
     const browser = await chromium.launch({
       headless: true,
       chromiumSandbox: false,
+      downloadsPath: __dirname,
     });
-    const context = await browser.newContext();
+    // const context = await browser.newContext({ acceptDownloads: true });
+    // await chromium.launchPersistentContext("../public/", {
+    //   options: { acceptDownloads: true },
+    // });
+    const context = await browser.newContext({
+      acceptDownloads: true,
+      downloadsPath: __dirname,
+    });
     const page = await context.newPage();
     context.on("page", async (newPage) => {
       await page.waitForTimeout(1000);
@@ -143,6 +151,7 @@ const fetchCertificate = async function (ans) {
     );
     await page.fill('input[name="NI"]', ans);
     // The captcha is reloaded once, so we wait 1s until the new image is shown
+    console.log(__dirname + "\\");
     await page.waitForTimeout(1000);
     const svgImage = await page.$("#imgCaptchaSerpro");
     await svgImage.screenshot({ path: "public/captcha.png" });
@@ -151,11 +160,21 @@ const fetchCertificate = async function (ans) {
     await page.waitForTimeout(5500);
     const crackedCaptcha = await getRequestCaptcha(idCaptcha);
     await page.fill("#txtTexto_captcha_serpro_gov_br", crackedCaptcha);
-    await page.click("#submit1");
+    await page.click("#validar");
     await page.click('"Emissão de nova certidão"');
-    await page.click('img[alt="Preparar Página para Impressão"]');
-    return true;
+    const [download] = await Promise.all([
+      page.waitForEvent("download"), // wait for download to start
+      // page.click("a"),
+    ]);
+    // await download.saveAs(__dirname + "\\");
+    // await download.delete();
+    // wait for download to complete
+    path = await download.path();
+    console.log(path);
+    // await page.click('img[alt="Preparar Página para Impressão"]');
+    return path;
   } catch (err) {
+    console.log(err);
     return false;
   }
 };
@@ -180,6 +199,7 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
           pdfFile: a,
         });
       } else {
+        console.log(path);
         res.send({ answerCNPJ: "", pdfFile: a });
       }
     });
@@ -187,7 +207,8 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
 });
 
 app.get("/download", function (req, res) {
-  const file = `${__dirname}/public/page.pdf`;
+  // const file = `${__dirname}/public/page.pdf`;
+  const file = path;
   res.download(file);
 });
 
