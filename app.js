@@ -199,12 +199,13 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
           pdfFile: a,
         });
       } else {
-        console.log(path);
         fs.rename(
           path,
           `${__dirname}${"\\PDFFILES\\"}${ans}.pdf`,
           function (err) {}
         );
+
+        console.log(`${__dirname}${"\\PDFFILES\\"}${ans}.pdf`);
         fs.unlink(path, (err) => {
           if (err) {
             console.error(err);
@@ -213,7 +214,12 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
 
           //file removed
         });
-        res.send({ answerCNPJ: "", pdfFile: a });
+
+        console.log(path);
+        res.send({
+          answerCNPJ: "",
+          pdfFile: `${__dirname}${"\\PDFFILES\\"}${ans}.pdf`,
+        });
       }
     });
   }
@@ -223,7 +229,6 @@ app.get("/download", function (req, res) {
   // const file = `${__dirname}/public/page.pdf`;
 
   const file = `${__dirname}${"\\PDFFILES\\"}${ans}.pdf`;
-  console.log(`${__dirname}${"\\PDFFILES\\"}${ans}.pdf`);
 
   res.download(file);
 });
