@@ -217,7 +217,8 @@ tryItBtn.addEventListener("click", async (e) => {
   }
   document.querySelector(".loading-img").classList.remove("hidden");
   document.querySelector(".download-form").classList.add("hidden");
-  document.querySelector(".error-msg").textContent = "It can take about 20s";
+  document.querySelector(".error-msg").textContent =
+    "It will take few seconds...";
   document.querySelector(".loading-img").style.opacity = "0";
 
   // ----------------------

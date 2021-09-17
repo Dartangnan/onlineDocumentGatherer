@@ -208,7 +208,10 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
 
 app.get("/download", function (req, res) {
   // const file = `${__dirname}/public/page.pdf`;
-  const file = path;
+
+  console.log(`${__dirname}/${ans}`);
+  fs.rename(path, `${__dirname}${"\\"}${ans}.pdf`, function (err) {});
+  const file = `${__dirname}${"\\"}${ans}.pdf`;
   res.download(file);
 });
 
