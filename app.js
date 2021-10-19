@@ -126,9 +126,9 @@ let path = "";
 const fetchCertificate = async function (ans) {
   try {
     const browser = await chromium.launch({
-      headless: true,
+      headless: false,
       chromiumSandbox: false,
-      downloadsPath: __dirname,
+      downloadsPath: __dirname + "\\PDFFILES",
     });
     // const context = await browser.newContext({ acceptDownloads: true });
     // await chromium.launchPersistentContext("../public/", {
@@ -136,7 +136,7 @@ const fetchCertificate = async function (ans) {
     // });
     const context = await browser.newContext({
       acceptDownloads: true,
-      downloadsPath: __dirname,
+      downloadsPath: __dirname + "\\PDFFILES",
     });
     const page = await context.newPage();
     context.on("page", async (newPage) => {
@@ -224,7 +224,7 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
 app.get("/download", function (req, res) {
   // const file = `${__dirname}/public/page.pdf`;
 
-  const file = `${__dirname}${"\\PDFFILES\\"}${ans}.pdf`;
+  const file = `${"./PDFFILES\\"}${ans}.pdf`;
 
   res.download(file);
 });
