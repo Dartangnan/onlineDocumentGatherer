@@ -151,7 +151,6 @@ const fetchCertificate = async function (ans) {
     );
     await page.fill('input[name="NI"]', ans);
     // The captcha is reloaded once, so we wait 1s until the new image is shown
-    console.log(__dirname + "\\");
     await page.waitForTimeout(1000);
     const svgImage = await page.$("#imgCaptchaSerpro");
     await svgImage.screenshot({ path: "public/captcha.png" });
@@ -172,6 +171,7 @@ const fetchCertificate = async function (ans) {
     path = await download.path();
     console.log(path);
     // await page.click('img[alt="Preparar Página para Impressão"]');
+    fs.rename(path, `${"./PDFFILES\\"}${ans}.pdf`, function (err) {});
     return path;
   } catch (err) {
     console.log(err);
@@ -199,26 +199,22 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
           pdfFile: a,
         });
       } else {
-        fs.rename(
-          path,
-          `${__dirname}${"\\PDFFILES\\"}${ans}.pdf`,
-          function (err) {}
-        );
+        fs.rename(path, `${"./PDFFILES\\"}${ans}.pdf`, function (err) {});
 
-        console.log(`${__dirname}${"\\PDFFILES\\"}${ans}.pdf`);
-        fs.unlink(path, (err) => {
-          if (err) {
-            console.error(err);
-            return;
-          }
+        console.log(`${"./PDFFILES\\"}${ans}.pdf`);
+        // fs.unlink(path, (err) => {
+        //   if (err) {
+        //     console.error(err);
+        //     return;
+        //   }
 
-          //file removed
-        });
+        //   //file removed
+        // });
 
         console.log(path);
         res.send({
           answerCNPJ: "",
-          pdfFile: `${__dirname}${"\\PDFFILES\\"}${ans}.pdf`,
+          pdfFile: `${"./PDFFILES\\"}${ans}.pdf`,
         });
       }
     });
