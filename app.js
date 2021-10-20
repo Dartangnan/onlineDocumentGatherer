@@ -126,7 +126,7 @@ let path = "";
 const fetchCertificate = async function (ans) {
   try {
     const browser = await chromium.launch({
-      headless: false,
+      headless: true,
       chromiumSandbox: false,
       downloadsPath: __dirname,
     });
