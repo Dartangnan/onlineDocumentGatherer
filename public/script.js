@@ -233,6 +233,7 @@ tryItBtn.addEventListener("click", async (e) => {
   btnClicked = 1;
   document.querySelector(".loading-img").style.opacity = "1";
   const msgJSON = await (await fetch(`/cnpj-check/${cnpj}`)).json();
+  console.log("after");
   document.querySelector(".loading-img").style.opacity = "0";
   if (!msgJSON.pdfFile) {
     document.querySelector(".error-msg").textContent = await msgJSON.answerCNPJ;
