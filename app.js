@@ -128,7 +128,7 @@ const fetchCertificate = async function (ans) {
     const browser = await chromium.launch({
       headless: false,
       chromiumSandbox: false,
-      downloadsPath: __dirname + "\\PDFFILES",
+      downloadsPath: __dirname,
     });
     // const context = await browser.newContext({ acceptDownloads: true });
     // await chromium.launchPersistentContext("../public/", {
@@ -136,7 +136,7 @@ const fetchCertificate = async function (ans) {
     // });
     const context = await browser.newContext({
       acceptDownloads: true,
-      downloadsPath: __dirname + "\\PDFFILES",
+      downloadsPath: __dirname,
     });
     const page = await context.newPage();
     context.on("page", async (newPage) => {
@@ -202,6 +202,19 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
         fs.rename(path, `${"./PDFFILES\\"}${ans}.pdf`, function (err) {});
 
         console.log(`${"./PDFFILES\\"}${ans}.pdf`);
+
+        fs.readFile(path, (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+          console.log(data);
+
+          xxx = data;
+        });
+
+        console.log("in");
+
         // fs.unlink(path, (err) => {
         //   if (err) {
         //     console.error(err);
@@ -211,15 +224,21 @@ app.get("/cnpj-check/:cnpj", function (req, res) {
         //   //file removed
         // });
 
+        // xxx = data;
+
+        console.log("out");
         console.log(path);
         res.send({
           answerCNPJ: "",
           pdfFile: `${"./PDFFILES\\"}${ans}.pdf`,
+          // pdfFile: data,
         });
       }
     });
   }
 });
+
+let xxx;
 
 app.get("/download", function (req, res) {
   // const file = `${__dirname}/public/page.pdf`;
