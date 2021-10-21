@@ -186,7 +186,7 @@ app.get("/", function (req, res) {
   res.render("home", dataError);
 });
 
-app.get("/cnpj-check/:cnpj", function (req, res) {
+app.get("/cnpjcheck/:cnpj", function (req, res) {
   ans = validateCNPJ(req.params.cnpj);
   if (typeof ans === "string") {
     res.send({ answerCNPJ: ans, pdfFile: false });

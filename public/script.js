@@ -232,7 +232,7 @@ tryItBtn.addEventListener("click", async (e) => {
   }
   btnClicked = 1;
   document.querySelector(".loading-img").style.opacity = "1";
-  const msgJSON = await (await fetch(`/cnpj-check/${cnpj}`)).json();
+  const msgJSON = await (await fetch(`/cnpjcheck/${cnpj}`)).json();
   console.log("after");
   document.querySelector(".loading-img").style.opacity = "0";
   if (!msgJSON.pdfFile) {
