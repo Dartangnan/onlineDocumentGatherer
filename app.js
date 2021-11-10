@@ -16,7 +16,7 @@ const app = express();
 
 // templating:
 app.set("view engine", "ejs");
-
+app.use(express.json());
 // Parse information:
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -126,7 +126,7 @@ let path = "";
 const fetchCertificate = async function (ans) {
   try {
     const browser = await chromium.launch({
-      headless: true,
+      headless: false,
       chromiumSandbox: false,
       downloadsPath: __dirname,
     });
@@ -186,12 +186,23 @@ app.get("/", function (req, res) {
   res.render("home", dataError);
 });
 
-app.get("/cnpjcheck/:cnpj", function (req, res) {
-  ans = validateCNPJ(req.params.cnpj);
+app.get("/cnpj-retrieve", function (req, res) {
+  console.log("get");
+  res.send({
+    answerCNPJ: "",
+    pdfFile: `${"./PDFFILES\\"}${ans}.pdf`,
+    // pdfFile: data,
+  });
+});
+
+app.post("/cnpj-check", function (req, res) {
+  ans = validateCNPJ(req.body.CNPJ);
   if (typeof ans === "string") {
     res.send({ answerCNPJ: ans, pdfFile: false });
+    console.log("wrong");
   }
   if (typeof ans === "number") {
+    console.log("number");
     fetchCertificate(`${ans}`).then((a) => {
       if (!a) {
         res.send({
@@ -199,6 +210,7 @@ app.get("/cnpjcheck/:cnpj", function (req, res) {
           pdfFile: a,
         });
       } else {
+        console.log("else");
         fs.rename(path, `${"./PDFFILES\\"}${ans}.pdf`, function (err) {});
 
         console.log(`${"./PDFFILES\\"}${ans}.pdf`);

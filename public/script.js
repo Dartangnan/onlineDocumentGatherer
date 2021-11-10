@@ -231,8 +231,17 @@ tryItBtn.addEventListener("click", async (e) => {
     return;
   }
   btnClicked = 1;
+  let form = new FormData(document.getElementById("cnpj-form"));
+  console.log(document.getElementById("cnpj-form"));
+  console.log(form);
   document.querySelector(".loading-img").style.opacity = "1";
-  const msgJSON = await (await fetch(`/cnpjcheck/${cnpj}`)).json();
+  // const msgJSON = await (await fetch(`/cnpj-check/${cnpj}`)).json();
+  // await fetch("/cnpj-check", {
+  //   method: "POST",
+  //   body: { CNP: cnpj },
+  // });
+  await axios.post("/cnpj-check", { CNPJ: cnpj });
+  const msgJSON = await (await fetch(`/cnpj-retrieve`)).json();
   console.log("after");
   document.querySelector(".loading-img").style.opacity = "0";
   if (!msgJSON.pdfFile) {
