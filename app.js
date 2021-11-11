@@ -162,11 +162,12 @@ const fetchCertificate = async function (ans) {
     await page.click("#validar");
     await page.click('"Emissão de nova certidão"');
 
-    return ans;
     const [download] = await Promise.all([
       page.waitForEvent("download"), // wait for download to start
       // page.click("a"),
     ]);
+
+    return ans;
     // await download.saveAs(__dirname + "\\");
     // await download.delete();
     // wait for download to complete
