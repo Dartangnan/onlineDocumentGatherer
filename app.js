@@ -161,6 +161,7 @@ const fetchCertificate = async function (ans) {
     await page.fill("#txtTexto_captcha_serpro_gov_br", crackedCaptcha);
     await page.click("#validar");
     await page.click('"Emissão de nova certidão"');
+    return;
     const [download] = await Promise.all([
       page.waitForEvent("download"), // wait for download to start
       // page.click("a"),
