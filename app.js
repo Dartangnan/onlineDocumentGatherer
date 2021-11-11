@@ -175,6 +175,7 @@ const fetchCertificate = async function (ans) {
     return path;
   } catch (err) {
     console.log(err);
+    res.send(err);
     return false;
   }
 };
@@ -197,6 +198,8 @@ app.get("/cnpj-retrieve", function (req, res) {
 
 app.post("/cnpj-check", function (req, res) {
   ans = validateCNPJ(req.body.CNPJ);
+  console.log("in");
+  res.send("YEAH");
   if (typeof ans === "string") {
     res.send({ answerCNPJ: ans, pdfFile: false });
     console.log("wrong");
