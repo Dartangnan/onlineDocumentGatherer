@@ -199,7 +199,6 @@ app.get("/cnpj-retrieve", function (req, res) {
 app.post("/cnpj-check", function (req, res) {
   ans = validateCNPJ(req.body.CNPJ);
   console.log("in");
-  res.send("YEAH");
   if (typeof ans === "string") {
     res.send({ answerCNPJ: ans, pdfFile: false });
     console.log("wrong");
@@ -207,6 +206,7 @@ app.post("/cnpj-check", function (req, res) {
   if (typeof ans === "number") {
     console.log("number");
     fetchCertificate(`${ans}`).then((a) => {
+      res.send("YEAH");
       if (!a) {
         res.send({
           answerCNPJ: "Ops! Something went wrong, please try again!",
