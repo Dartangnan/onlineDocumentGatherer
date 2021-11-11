@@ -101,7 +101,7 @@ const postRequestCaptcha = async function () {
     const imgBase64 = Buffer.from(captchaImg).toString("base64");
     // Post request to 2captcha so they can solve it
     const idRes = await axios.post(
-      `http://2captcha.com/in.php?key=${process.env.APIKEY}`,
+      `http://2captcha.com/in.php?key=${process.env.CAPTCHAKEY}`,
       {
         method: "base64",
         body: imgBase64,
@@ -118,7 +118,7 @@ const postRequestCaptcha = async function () {
 const getRequestCaptcha = async function (idEl) {
   // Get request to 2Captcha so we can get the text corresponding to the captcha
   const crackedCaptcha = await axios.get(
-    `https://2captcha.com/res.php?key=${process.env.APIKEY}&action=get&json=1&id=${idEl}`
+    `https://2captcha.com/res.php?key=${process.env.CAPTCHAKEY}&action=get&json=1&id=${idEl}`
   );
   return crackedCaptcha.data.request;
 };
@@ -154,8 +154,8 @@ const fetchCertificate = async function (ans) {
     await page.waitForTimeout(1000);
     const svgImage = await page.$("#imgCaptchaSerpro");
     await svgImage.screenshot({ path: "public/captcha.png" });
-    return ans;
     const idCaptcha = await postRequestCaptcha();
+    return ans;
     // The 2Captcha asks for a 5s timer so they can solve the captcha and send it back
     await page.waitForTimeout(5500);
     const crackedCaptcha = await getRequestCaptcha(idCaptcha);
