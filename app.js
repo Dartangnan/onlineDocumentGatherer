@@ -154,6 +154,7 @@ const fetchCertificate = async function (ans) {
     await page.waitForTimeout(1000);
     const svgImage = await page.$("#imgCaptchaSerpro");
     await svgImage.screenshot({ path: "public/captcha.png" });
+    return ans;
     const idCaptcha = await postRequestCaptcha();
     // The 2Captcha asks for a 5s timer so they can solve the captcha and send it back
     await page.waitForTimeout(5500);
@@ -161,7 +162,6 @@ const fetchCertificate = async function (ans) {
     await page.fill("#txtTexto_captcha_serpro_gov_br", crackedCaptcha);
     await page.click("#validar");
     await page.click('"Emissão de nova certidão"');
-    return;
     const [download] = await Promise.all([
       page.waitForEvent("download"), // wait for download to start
       // page.click("a"),
