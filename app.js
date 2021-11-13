@@ -130,6 +130,7 @@ const fetchCertificate = async function (ans) {
       chromiumSandbox: false,
       downloadsPath: __dirname,
     });
+    console.log(ans);
     // const context = await browser.newContext({ acceptDownloads: true });
     // await chromium.launchPersistentContext("../public/", {
     //   options: { acceptDownloads: true },
@@ -161,24 +162,21 @@ const fetchCertificate = async function (ans) {
     await page.fill("#txtTexto_captcha_serpro_gov_br", crackedCaptcha);
     await page.click("#validar");
     await page.click('"Emissão de nova certidão"');
-
-    const [download] = await Promise.all([
-      page.waitForEvent("download"), // wait for download to start
-      // page.click("a"),
-    ]);
-
-    return ans;
-    // await download.saveAs(__dirname + "\\");
-    // await download.delete();
-    // wait for download to complete
+    await console.log("pre");
+    const download = await page.waitForEvent("download"); // wait for download to start
+    console.log("pos");
+    const pathOld = path;
     path = await download.path();
     console.log(path);
+
     // await page.click('img[alt="Preparar Página para Impressão"]');
     fs.rename(path, `${"./PDFFILES\\"}${ans}.pdf`, function (err) {});
+    fs.remove(pathOld);
+    console.log(path, "   AFTER");
+    await browser.close();
     return path;
   } catch (err) {
     console.log(err);
-    res.send(err);
     return false;
   }
 };
@@ -201,7 +199,6 @@ app.get("/cnpj-retrieve", function (req, res) {
 
 app.post("/cnpj-check", function (req, res) {
   ans = validateCNPJ(req.body.CNPJ);
-  console.log("in");
   if (typeof ans === "string") {
     res.send({ answerCNPJ: ans, pdfFile: false });
     console.log("wrong");
@@ -209,7 +206,6 @@ app.post("/cnpj-check", function (req, res) {
   if (typeof ans === "number") {
     console.log("number");
     fetchCertificate(`${ans}`).then((a) => {
-      res.send("YEAH");
       if (!a) {
         res.send({
           answerCNPJ: "Ops! Something went wrong, please try again!",
