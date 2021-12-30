@@ -1,5 +1,5 @@
 # onlineDocumentGatherer
-## Web Scrapper 
+## Web Scraper 
 <hr>
 In this project, I developed a tool for accountants in Brazil to automatically fetch certificates from the Brazilian Ministry of Finance and make them available for download. In a conversation with a friend who owns an accounting company, I realized that it takes a lot of time for accountants to retrieve all debt certificates for their clients. 
 <br/>
