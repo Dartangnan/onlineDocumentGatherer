@@ -14,5 +14,5 @@ Front-End|Back-End
 HTML | Node.js
 CSS | Express.js
 JavaScript |axios
- |playwright
-  |MongoDB
+ ||playwright
+ | |MongoDB
